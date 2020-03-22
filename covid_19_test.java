@@ -1,7 +1,7 @@
 /*
 *@Author :Prince Kabutey aka @thecodewarlock
 *Project : Corona Virus Patient Test
-*
+*covid-19 virus and patient test software and data structure with java
 */
 class CoronaPatient {
 
@@ -84,10 +84,12 @@ class CoronaVirus {
 	
 	public boolean TestNow(){
 		
+		return true;
 	}
 	
 	public boolean isSevere(){
 		
+		return true;
 	}
 	
 }
@@ -97,7 +99,18 @@ class MysqlDatabase {
 	
 	public boolean addPatientRecord(CoronaPatient patient){
 		
+		//get patient credentials
+		String name=patient.getPatientInfo("name");
+		String age=patient.getPatientInfo("age");
+		String country=patient.getPatientInfo("country");
+		String marriage_status=patient.getPatientInfo("marriage_status");
+		
+		String status=patient.getPatientInfo("status");
+		String action=patient.getPatientInfo("action");
+		
 		//perform database insert action
+		
+		return true;
 	}
 	
 }
