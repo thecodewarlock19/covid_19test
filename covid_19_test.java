@@ -143,8 +143,31 @@ class CoronaVirus {
 	}
 	
 	public boolean isSevere(){
+            
+                //symptomsConstants[0]=> cough 
+                //symptomsConstants[1]=> fever  
+                //symptomsConstants[2]=> tiredness 
+                //symptomsConstants[3]=> difficulty breathing
+                //String[] symptomsConstants={"cough","fever","tiredness","difficulty breathing"};
+                
+                //get patient symtoms 
+                 ArrayList symtoms=this.patient.getPatientSymtoms();
+                //System.out.println(this.patient.getPatintSymtoms());
+                
+                //id use for patient in (patient blood or fluid test) database
+                //int patientId=25;
+                //|| this.patient.getBloodOrFluidTestResult(patientId)
+                
+                for (Object symtom : symtoms) {
+                    //System.out.println(symtom);
+
+                    if(symtom =="difficulty breathing"){
+
+                        return true;
+                    }
+                } 
 		
-		return true;
+		return false;
 	}
 	
 }
@@ -187,7 +210,7 @@ public class Covid_19 {
                 //symptomsConstants[1]=> fever  
                 //symptomsConstants[2]=> tiredness 
                 //symptomsConstants[3]=> difficulty breathing
-                String[] symptomsConstants={"cough","fever","tiredness","","difficulty breathing"};
+                String[] symptomsConstants={"cough","fever","tiredness","difficulty breathing"};
                         
                 patient.addPatientSymptoms(symptomsConstants[0]);
                 patient.addPatientSymptoms(symptomsConstants[1]);
