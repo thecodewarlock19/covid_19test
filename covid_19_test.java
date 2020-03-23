@@ -2,8 +2,6 @@ package covid_19;
 
 import java.util.ArrayList;
 
-
-
 /*
 *@Author :Prince Kabutey aka @thecodewarlock
 *Project : Corona Virus Patient Test
