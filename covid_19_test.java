@@ -1,3 +1,9 @@
+package covid_19;
+
+import java.util.ArrayList;
+
+
+
 /*
 *@Author :Prince Kabutey aka @thecodewarlock
 *Project : Corona Virus Patient Test
@@ -11,6 +17,8 @@ class CoronaPatient {
 	public String marriage_status;
 	public String status;
 	public String action;
+	
+	public ArrayList<String> Symptoms_Array;
 
 	public CoronaPatient(){
 		this.name="";
@@ -19,57 +27,82 @@ class CoronaPatient {
 		this.status="";
 		this.action="";
 		this.marriage_status="";
+		
+		this.Symptoms_Array=new ArrayList<>();
 	}
+        
+        public void addPatientSymptoms(String Symptoms){
+            
+            this.Symptoms_Array.add(Symptoms);
+        }
+        
+        public ArrayList<String> getPatientSymtoms(){
+            
+            return this.Symptoms_Array;
+        }
+        
+        /*
+         get patient blood or fluid test result from 
+        (patient blood or fluid test) database using the patient id
+         note you can use any other unique info or credential
+        */
+        public boolean getBloodOrFluidTestResult(int patientId){
+            
+            return true;
+        }
 	
 	public String getPatientInfo(String attr_name){
 		
+                String result ="";
+                
 		switch(attr_name){
 			
 			case "name":
 			
-			return this.name;
+			result= this.name;
+                        
 			break;
 			
 			case "age":
 			
-			return this.age;
+			result= this.age;
 			break;
 			
 			case "country":
 			
-			return this.country;
+			result= this.country;
 			break;
 			
 			case "marriage_status":
 			
-			return this.marriage_status;
+			result= this.marriage_status;
 			break;
 			
 			case "status":
 			
-			return this.status;
+			result= this.status;
 			break;
 			
 			case "action":
 			
-			return this.action;
+			result= this.action;
 			break;
 			
 		}
 		
+            return result;
 	}
 	
 	public void Quaratine(){
 		
-		return true;
 	}
 	
 	public void Discharge(){
-		return true;
+	
 	}
 	
 	public void Isolate(){
-		return true;
+	
 	}
 }
 
@@ -83,8 +116,32 @@ class CoronaVirus {
 	}
 	
 	public boolean TestNow(){
+            
+            
+                //symptomsConstants[0]=> cough 
+                //symptomsConstants[1]=> fever  
+                //symptomsConstants[2]=> tiredness 
+                //symptomsConstants[3]=> difficulty breathing
+                //String[] symptomsConstants={"cough","fever","tiredness","difficulty breathing"};
+                
+                //get patient symtoms 
+                 ArrayList symtoms=this.patient.getPatientSymtoms();
+                //System.out.println(this.patient.getPatintSymtoms());
+                
+                //id use for patient in (patient blood or fluid test) database
+                int patientId=25;
+                
+                for (Object symtom : symtoms) {
+                    //System.out.println(symtom);
+
+                    if(symtom =="cough" || symtom =="fever" || symtom =="tiredness" || symtom =="difficulty breathing"  
+                            || this.patient.getBloodOrFluidTestResult(patientId)){
+
+                        return true;
+                    }
+                } 
 		
-		return true;
+		return false;
 	}
 	
 	public boolean isSevere(){
@@ -115,7 +172,7 @@ class MysqlDatabase {
 	
 }
 
-public class CoronaVirusTest {
+public class Covid_19 {
 	
 	public static void main(String[] args){
 		
@@ -123,9 +180,21 @@ public class CoronaVirusTest {
 		CoronaPatient patient=new CoronaPatient();
 		//set patient attrs or credentials
 		patient.name="James Smith";
-		patient.age=37;
+		patient.age="37";
 		patient.country="CANADA";
 		patient.marriage_status="married";
+                
+                //add symtoms 
+                //symptomsConstants[0]=> cough 
+                //symptomsConstants[1]=> fever  
+                //symptomsConstants[2]=> tiredness 
+                //symptomsConstants[3]=> difficulty breathing
+                String[] symptomsConstants={"cough","fever","tiredness","","difficulty breathing"};
+                        
+                patient.addPatientSymptoms(symptomsConstants[0]);
+                patient.addPatientSymptoms(symptomsConstants[1]);
+                patient.addPatientSymptoms(symptomsConstants[2]);
+                patient.addPatientSymptoms(symptomsConstants[3]);
 		
 		//corona virus object and instance
 		CoronaVirus covid_19=new CoronaVirus(patient);
@@ -144,7 +213,7 @@ public class CoronaVirusTest {
 			if(covid_19.isSevere()){
 				
 				patient.Isolate();
-				System.out.println("Quaratine Patient");
+				System.out.println("Isolate Patient");
 			}
 			
 			patient.status="positive";
